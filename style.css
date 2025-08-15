@@ -1,3 +1,5 @@
+/* https://www.realtimecolors.com/?colors=020d02-fcfdfc-f0b92d-8ed8f1-a1e3d2&fonts=Lexend%20Exa-Baloo%20Da%202 */
+
 :root[data-theme="light"] {
     --text: hsl(120, 73%, 3%);
     --background: hsl(120, 20%, 99%);

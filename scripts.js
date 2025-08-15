@@ -1,4 +1,5 @@
 // Query builder: https://www.visualcrossing.com/weather-query-builder/
+// icons: https://www.visualcrossing.com/resources/documentation/weather-api/defining-icon-set-in-the-weather-api/
 
 const weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 const months = [
@@ -44,7 +45,7 @@ function formatDate(dateInput) {
 getWeatherData("London").then((response) => {
   for (let i = 0; i < 7; i++) {
     const date = formatDate(response.days[i].datetime);
-    p.innerText += `${date.weekDay} ${date.day} ${date.month} ${date.year}|${response.days[i].temp} °C\n`;
+    p.innerText += `${date.weekDay} ${date.day} ${date.month} ${date.year} | ${response.days[i].temp} °C\n`;
     console.log(response);
   }
 });
