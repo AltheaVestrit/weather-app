@@ -10,8 +10,6 @@
     --secondary-200: hsl(195, 78%, 80%);
     --accent: hsl(165, 54%, 76%);
     --accent-100: hsl(164, 53%, 90%);
-
-    font-size: 53%;
 }
 
 /* :root[data-theme="dark"] {
@@ -91,7 +89,7 @@ body {
 /* Cards */
 .cards {
     width: fit-content;
-    margin: 0.5em auto;
+    margin: 0.5rem auto;
 }
 
 .card {
@@ -99,7 +97,7 @@ body {
     justify-content: space-between;
     align-items: stretch;
     background-color: var(--accent-100);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     padding: 0.5rem 0.6rem;
     border-radius: 8px;
     text-align: center;
