@@ -11,7 +11,7 @@
     --accent: hsl(165, 54%, 76%);
     --accent-100: hsl(164, 53%, 90%);
 
-    font-size: 53%;
+    /* font-size: 53%; */
 }
 
 /* :root[data-theme="dark"] {
