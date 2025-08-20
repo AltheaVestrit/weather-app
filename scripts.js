@@ -3,18 +3,18 @@
 
 const weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 const months = [
-  "January",
-  "February",
-  "March",
-  "April",
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
   "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
 ];
 const cards = document.querySelector(".cards");
 
@@ -110,7 +110,7 @@ function createCard(
   let uvValue = createEl("h5", "card__uvindex__value");
   uvValue.innerText = uvindex;
   let uvText = createEl("p", "card__uvindex__text");
-  uvText.innerText = "UV-index";
+  uvText.innerText = "UV";
   cardElements[4].appendChild(uvValue);
   cardElements[4].appendChild(uvText);
   // Add new nodes to document

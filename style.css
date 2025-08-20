@@ -119,7 +119,7 @@ body {
 }
 
 .card__date__month-year {
-    width: 13ch;
+    width: 7ch;
 }
 
 .card__weather {
@@ -128,4 +128,8 @@ body {
 
 .card__precip {
     width: 7ch;
+}
+
+.card__uvindex {
+    width: 5ch;
 }
