@@ -1,15 +1,21 @@
-@import url('https://fonts.googleapis.com/css?family=Lexend%20Exa:700|Baloo%20Da%202:400');
+@import url("https://fonts.googleapis.com/css?family=Lexend%20Exa:700|Baloo%20Da%202:400");
 /* https://www.realtimecolors.com/?colors=020d02-fcfdfc-f0b92d-8ed8f1-a1e3d2&fonts=Lexend%20Exa-Baloo%20Da%202 */
 
 :root {
-    --text: hsl(120, 73%, 3%);
-    --background: hsl(120, 20%, 99%);
-    --primary: hsl(43, 87%, 56%);
-    --secondary: hsl(195, 78%, 75%);
-    --secondary-100: hsl(195, 76%, 90%);
-    --secondary-200: hsl(195, 78%, 80%);
-    --accent: hsl(165, 54%, 76%);
-    --accent-100: hsl(164, 53%, 90%);
+  --text: hsl(120, 73%, 3%);
+  --background: hsl(120, 20%, 99%);
+  --primary: hsl(43, 87%, 56%);
+  --primary-500: hsl(43, 87%, 50%);
+  --primary-600: hsl(43, 87%, 40%);
+  --secondary: hsl(195, 78%, 75%);
+  --secondary-100: hsl(195, 76%, 90%);
+  --secondary-200: hsl(195, 78%, 80%);
+  --accent: hsl(165, 54%, 76%);
+  --accent-100: hsl(164, 53%, 90%);
+  --accent-200: hsl(165, 55%, 80%);
+  --accent-300: hsl(165, 50%, 73%);
+  --accent-400: hsl(165, 54%, 60%);
+  --accent-600: hsl(165, 54%, 40%);
 }
 
 /* :root[data-theme="dark"] {
@@ -21,8 +27,8 @@
 } */
 
 html {
-    font-family: 'Baloo Da 2';
-    font-weight: 400;
+  font-family: "Baloo Da 2";
+  font-weight: 400;
 }
 
 h1,
@@ -30,106 +36,147 @@ h2,
 h3,
 h4,
 h5 {
-    font-family: 'Lexend Exa';
-    font-weight: 700;
+  font-family: "Lexend Exa";
+  font-weight: 700;
 }
 
 /* 16px */
 
 h1 {
-    font-size: 4.210rem;
-    /* 67.36px */
+  font-size: 4.21rem;
+  /* 67.36px */
 }
 
 h2 {
-    font-size: 3.158rem;
-    /* 50.56px */
+  font-size: 3.158rem;
+  /* 50.56px */
 }
 
 h3 {
-    font-size: 2.369rem;
-    /* 37.92px */
+  font-size: 2.369rem;
+  /* 37.92px */
 }
 
 h4 {
-    font-size: 1.777rem;
-    /* 28.48px */
+  font-size: 1.777rem;
+  /* 28.48px */
 }
 
 h5 {
-    font-size: 1.333rem;
-    /* 21.28px */
+  font-size: 1.333rem;
+  /* 21.28px */
 }
 
 small {
-    font-size: 0.750rem;
-    /* 12px */
+  font-size: 0.75rem;
+  /* 12px */
 }
 
 /* Reset */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font: inherit;
 }
 
 /* Test styles */
 
 img {
-    max-height: 1.5em;
+  max-height: 1.5em;
 }
 
 /* Body */
 body {
-    background-color: var(--background);
+  background-color: var(--background);
+}
+
+/* Form */
+form {
+  width: 360px;
+  display: flex;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+input {
+  border-radius: 8px;
+  padding: 0.5em;
+  border: 3px solid var(--primary);
+  outline: none;
+  flex-grow: 1;
+}
+
+input:focus {
+  border: 3px solid var(--primary-600);
+}
+
+button {
+  padding: 0.5em 1.5em;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--primary);
+}
+
+button:hover {
+  background-color: var(--primary-600);
+  cursor: pointer;
+  color: var(--background);
 }
 
 /* Cards */
 .cards {
-    width: fit-content;
-    margin: 0.5rem auto;
+  width: 360px;
+  margin: 0.5rem auto;
 }
 
 .card {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    background-color: var(--accent-100);
-    margin-bottom: 0.5rem;
-    padding: 0.5rem 0.6rem;
-    border-radius: 8px;
-    text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  background-color: var(--accent-100);
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  text-align: center;
 }
 
-.card>div {
-    display: flex;
-    gap: 0.1em;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding-left: 0.5em;
+.card:hover {
+  background-color: var(--accent-400) !important;
+}
+
+.card:first-of-type {
+  background-color: var(--accent-300);
+}
+
+.card > div {
+  display: flex;
+  gap: 0.1em;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 0.5em;
 }
 
 .card__weekday {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 2.2ch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.2ch;
 }
 
 .card__date__month-year {
-    width: 7ch;
+  width: 7ch;
 }
 
 .card__weather {
-    width: 10ch;
+  width: 10ch;
 }
 
 .card__precip {
-    width: 7ch;
+  width: 7ch;
 }
 
 .card__uvindex {
-    width: 5ch;
+  width: 5ch;
 }
