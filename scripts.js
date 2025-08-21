@@ -17,6 +17,9 @@ const months = [
   "Dec",
 ];
 const cards = document.querySelector(".cards");
+const input = document.querySelector("input");
+const btn = document.querySelector("button");
+const loc = document.querySelector(".location");
 
 async function getWeatherData(location) {
   const API_key = "Z85Y9JDDWDK4FHFWLRN9FY6Y8";
@@ -120,27 +123,33 @@ function createCard(
   cards.appendChild(card);
 }
 
-getWeatherData("London").then((response) => {
-  for (let i = 0; i < 7; i++) {
-    const date = formatDate(response.days[i].datetime);
-    const [icon, iconAlt] = decideWeatherIcon(response.days[i].icon);
-    const [precipIcon, precipAlt] = decidePrecipitationIcon(
-      response.days[i].precipprob
-    );
-    const [tempmin, tempmax] = getTemps(response.days[i]);
-    createCard(
-      date.weekDay,
-      date.day,
-      date.month,
-      date.year,
-      tempmin,
-      tempmax,
-      icon,
-      iconAlt,
-      response.days[i].precip,
-      precipIcon,
-      precipAlt,
-      response.days[i].uvindex
-    );
-  }
+function loadWeatherData(location) {
+  getWeatherData(location).then((response) => {
+    for (let i = 0; i < 7; i++) {
+      const date = formatDate(response.days[i].datetime);
+      const [icon, iconAlt] = decideWeatherIcon(response.days[i].icon);
+      const [precipIcon, precipAlt] = decidePrecipitationIcon(
+        response.days[i].precipprob
+      );
+      const [tempmin, tempmax] = getTemps(response.days[i]);
+      createCard(
+        date.weekDay,
+        date.day,
+        date.month,
+        date.year,
+        tempmin,
+        tempmax,
+        icon,
+        iconAlt,
+        response.days[i].precip,
+        precipIcon,
+        precipAlt,
+        response.days[i].uvindex
+      );
+    }
+  });
+}
+
+btn.addEventListener("click", (e) => {
+  loadWeatherData(input.value);
 });
