@@ -17,30 +17,36 @@ const months = [
   "Dec",
 ];
 const cards = document.querySelector(".cards");
+const form = document.querySelector("form");
 const input = document.querySelector("input");
 const btn = document.querySelector("button");
 const loc = document.querySelector(".location");
+const address = document.querySelector(".resolved_address");
 
 async function getWeatherData(location) {
-  const API_key = "Z85Y9JDDWDK4FHFWLRN9FY6Y8";
-  const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&elements=datetime%2CresolvedAddress%2Ctempmax%2Ctempmin%2Ctemp%2Cprecip%2Cprecipprob%2Cpreciptype%2Cuvindex%2Cicon&include=days%2Cfcst&&key=${API_key}&contentType=json&iconSet=icons1`;
+  try {
+    const API_key = "Z85Y9JDDWDK4FHFWLRN9FY6Y8";
+    const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&elements=datetime%2CresolvedAddress%2Ctempmax%2Ctempmin%2Ctemp%2Cprecip%2Cprecipprob%2Cpreciptype%2Cuvindex%2Cicon&include=days%2Cfcst&&key=${API_key}&contentType=json&iconSet=icons1`;
 
-  let response = await fetch(url, { mode: "cors" });
-  let json = await response.json();
-  return json;
+    let response = await fetch(url, { mode: "cors" });
+    let json = await response.json();
+    processWeatherData(json);
+  } catch (error) {
+    return;
+  }
 }
 
 function decideWeatherIcon(icon) {
   return [`./img/weather_icons/${icon}.svg`, icon];
 }
 
-function decidePrecipitationIcon(precipprob) {
-  if (precipprob > 30) {
-    return ["./img/weather_icons/drop_full.svg", "Heavy rain"];
-  } else if (precipprob == 0) {
-    return ["./img/weather_icons/drop_empty.svg", "No rain"];
+function decidePrecipitationIcon(precip) {
+  if (precip > 1) {
+    return ["./img/weather_icons/drop_full.svg", "Heavy precipitation"];
+  } else if (precip == 0) {
+    return ["./img/weather_icons/drop_empty.svg", "No precipitation"];
   } else {
-    return ["./img/weather_icons/drop_medium.svg", "Some rain"];
+    return ["./img/weather_icons/drop_medium.svg", "Some precipitation"];
   }
 }
 
@@ -72,7 +78,7 @@ function createCard(
   tempmax,
   icon,
   iconAlt,
-  precip,
+  precipprob,
   precipIcon,
   precipAlt,
   uvindex
@@ -105,7 +111,7 @@ function createCard(
   precipIconNode.src = precipIcon;
   precipIconNode.alt = precipAlt;
   let precipNode = createEl("p", "card__precip__value");
-  precipNode.innerText = `${precip} mm`;
+  precipNode.innerText = `${precipprob} %`;
   cardElements[3].appendChild(precipIconNode);
   cardElements[3].appendChild(precipNode);
   // UV-index
@@ -123,33 +129,38 @@ function createCard(
   cards.appendChild(card);
 }
 
-function loadWeatherData(location) {
-  getWeatherData(location).then((response) => {
-    for (let i = 0; i < 7; i++) {
-      const date = formatDate(response.days[i].datetime);
-      const [icon, iconAlt] = decideWeatherIcon(response.days[i].icon);
-      const [precipIcon, precipAlt] = decidePrecipitationIcon(
-        response.days[i].precipprob
-      );
-      const [tempmin, tempmax] = getTemps(response.days[i]);
-      createCard(
-        date.weekDay,
-        date.day,
-        date.month,
-        date.year,
-        tempmin,
-        tempmax,
-        icon,
-        iconAlt,
-        response.days[i].precip,
-        precipIcon,
-        precipAlt,
-        response.days[i].uvindex
-      );
-    }
-  });
+function processWeatherData(response) {
+  cards.innerHTML = "";
+  address.innerText = response.resolvedAddress;
+  for (let i = 0; i < 7; i++) {
+    const date = formatDate(response.days[i].datetime);
+    const [icon, iconAlt] = decideWeatherIcon(response.days[i].icon);
+    const [precipIcon, precipAlt] = decidePrecipitationIcon(
+      response.days[i].precip
+    );
+    const [tempmin, tempmax] = getTemps(response.days[i]);
+    createCard(
+      date.weekDay,
+      date.day,
+      date.month,
+      date.year,
+      tempmin,
+      tempmax,
+      icon,
+      iconAlt,
+      response.days[i].precipprob,
+      precipIcon,
+      precipAlt,
+      response.days[i].uvindex
+    );
+  }
 }
 
 btn.addEventListener("click", (e) => {
-  loadWeatherData(input.value);
+  if (form.checkValidity()) {
+    e.preventDefault();
+    getWeatherData(input.value);
+  }
 });
+
+getWeatherData("London");
